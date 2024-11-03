@@ -4,11 +4,29 @@ import { anchorGo } from "../helpers/anchorGo";
 import { handleAnchorProjects } from "../helpers/handleAnchorProjects.jsx";
 import { projects } from "../helpers/projectContent.js";
 import Header from "./Header.jsx";
+import { useQuery } from "@tanstack/react-query";
+import sendAnalyticsSignal from "../helpers/allowedAnalytics.js";
 const PAGE_TITLE = "Komal Sai - My projects";
 const PAGE_DESCRIPTION =
   "This page contains information about my projects, their descriptions, technologies, etc.";
 
 const Projects = () => {
+  const pageName = "projects";
+
+  const sendAnalyticsEvent = async () => {
+    return await sendAnalyticsSignal(pageName);
+  };
+
+  const { refetch } = useQuery({
+    queryKey: ["analyticsEvent"],
+    queryFn: sendAnalyticsEvent,
+    enabled: false,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
   useEffect(() => {
     anchorGo();
   }, []);

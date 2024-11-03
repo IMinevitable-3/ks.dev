@@ -1,7 +1,27 @@
-import { location, statsURL } from "../helpers/constants";
-// import FooterSong from "../FooterSong";
-// TODO : Add song stats
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { location } from "../helpers/constants";
+import sendAnalyticsSignal from "../helpers/allowedAnalytics";
+const fetchVisitorCount = async () => {
+  const response = await axios.post(
+    `${import.meta.env.VITE_APP_API_URL}/count-events`,
+    {
+      event: "home",
+    }
+  );
+  return response.data.count;
+};
+
 const Footer = () => {
+  const {
+    data: visitorCount,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["visitorCount"],
+    queryFn: fetchVisitorCount,
+  });
+
   return (
     <footer className="select-none pb-2 pt-5 text-lg">
       <div className="grid w-full grid-cols-1 items-center gap-2 px-1 sm:px-5 md:grid-cols-3">
@@ -28,25 +48,27 @@ const Footer = () => {
             href={location.url}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => sendAnalyticsSignal("location")}
           >
             {location.name}
           </a>
         </div>
 
         <div className="flex items-center justify-start space-x-2 md:justify-center">
-          <a
-            className="duration-500 hover:text-[#ED4245]"
-            href={statsURL}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {100} views
-          </a>
+          {isLoading && <span>Loading...</span>}
+          {isError && <span>Error fetching data</span>}
+          {!isLoading && !isError && (
+            <a
+              className="duration-500 hover:text-[#ED4245]"
+              href="/analytics"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => sendAnalyticsSignal("analytics")}
+            >
+              {visitorCount} views
+            </a>
+          )}
         </div>
-
-        {/* <div className="flex items-center justify-start space-x-2 md:justify-end">
-          <FooterSong />
-        </div> */}
       </div>
     </footer>
   );

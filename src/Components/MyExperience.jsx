@@ -1,4 +1,6 @@
 import { Experience } from "../helpers/aboutContent";
+import sendAnalyticsSignal from "../helpers/allowedAnalytics";
+
 const formatDate = (date) => {
   if (!date) return "present";
   const options = { year: "numeric", month: "short" };
@@ -16,6 +18,11 @@ const MyExperience = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="font-bold text-lg duration-500 hover:text-[#ED4245]"
+              onClick={(event) => {
+                event.preventDefault();
+                sendAnalyticsSignal(exp.company);
+                window.open(exp.product, "_blank");
+              }}
             >
               {exp.company}
             </a>

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { headerDropdownLinks } from "../helpers/constants";
 import { useLocation } from "react-router-dom";
-
 const Header = () => {
   const location = useLocation();
   const isRootPage = location.pathname === "/";
@@ -53,7 +52,9 @@ const Header = () => {
                   className="duration-500 hover:text-[#ED4245]"
                   href={link.url}
                   target={link.external ? "_blank" : undefined}
-                  onClick={() => setIsDropdownActive(false)}
+                  onClick={() => {
+                    setIsDropdownActive(false);
+                  }}
                 >
                   {link.name}
                 </a>

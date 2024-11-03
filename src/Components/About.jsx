@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
-
+import { useQuery } from "@tanstack/react-query";
 import { anchorGo } from "../helpers/anchorGo";
 import { handleAnchorAbout } from "../helpers/handleAnchorAbout";
 import Header from "./Header";
@@ -12,11 +12,26 @@ import Footer from "./Footer";
 import HobbiesAndInterests from "./HobbiesAndInterests";
 import MyExperience from "./MyExperience";
 import { SocialLinks } from "./SocialLinks";
-
+import sendAnalyticsSignal from "../helpers/allowedAnalytics";
 const About = () => {
   const PAGE_TITLE = "Komal Sai - About me";
   const PAGE_DESCRIPTION =
     "This page contains all information about my background education, tech stack, hobbies, etc.";
+  const pageName = "about";
+
+  const sendAnalyticsEvent = async () => {
+    return await sendAnalyticsSignal(pageName);
+  };
+
+  const { refetch } = useQuery({
+    queryKey: ["analyticsEvent"],
+    queryFn: sendAnalyticsEvent,
+    enabled: false,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   useEffect(() => {
     anchorGo();
@@ -51,6 +66,7 @@ const About = () => {
                 className="duration-500 hover:text-[#ED4245]"
                 href="/api/pdf"
                 data-umami-event="Download CV"
+                onClick={() => sendAnalyticsSignal("cv")}
               >
                 [CV]
               </a>

@@ -1,5 +1,5 @@
 import { Mail } from "lucide-react";
-
+import sendAnalyticsSignal from "../helpers/allowedAnalytics";
 const socials = {
   mail: {
     icon: <Mail />,
@@ -17,6 +17,11 @@ export const SocialLinks = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="box-decorator bg-[#ED4245] capitalize space-x-2"
+          onClick={(event) => {
+            event.preventDefault();
+            sendAnalyticsSignal("mail");
+            window.open(socials[social].url, "_blank");
+          }}
         >
           {socials[social].icon}
           <span>{social}</span>

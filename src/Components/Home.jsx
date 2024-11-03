@@ -1,7 +1,25 @@
+import { useEffect } from "react";
+import sendAnalyticsSignal from "../helpers/allowedAnalytics";
+import { useQuery } from "@tanstack/react-query";
 import { OWNER } from "../helpers/constants";
 import Footer from "./Footer";
 import Header from "./Header";
 const Home = () => {
+  const pageName = "home";
+
+  const sendAnalyticsEvent = async () => {
+    return await sendAnalyticsSignal(pageName);
+  };
+
+  const { refetch } = useQuery({
+    queryKey: ["analyticsEvent"],
+    queryFn: sendAnalyticsEvent,
+    enabled: false,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   return (
     <div className="flex min-h-dvh flex-col justify-between bg-gradient-to-br from-[#121212] to-[#0C0E10] text-white">
       <Header />
