@@ -50,6 +50,10 @@ const signalSchema = new mongoose.Schema({
 
 const Signal = mongoose.model("Signal", signalSchema);
 
+app.get("/", async (req, res) => {
+  res.status(200).send({ message: "This API is breathing" });
+});
+
 app.post("/send-signal", async (req, res) => {
   try {
     const event = req.body.event;
