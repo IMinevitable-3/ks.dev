@@ -65,7 +65,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               onClick={() => sendAnalyticsSignal("analytics")}
             >
-              {visitorCount} views
+              {Math.floor(visitorCount / 2)} views
             </a>
           )}
         </div>

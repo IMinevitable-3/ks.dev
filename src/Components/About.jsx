@@ -64,7 +64,7 @@ const About = () => {
               </h1>
               <a
                 className="duration-500 hover:text-[#ED4245]"
-                href="/api/pdf"
+                href="/Resume.pdf"
                 data-umami-event="Download CV"
                 onClick={() => sendAnalyticsSignal("cv")}
               >
