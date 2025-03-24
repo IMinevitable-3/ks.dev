@@ -87,6 +87,8 @@ const Projects = () => {
                           target="_blank"
                           rel="noreferrer"
                           href={url}
+                        data-umami-event={project.name}
+
                         >
                           {`[URL #${i + 1}]`}
                         </a>
@@ -98,6 +100,8 @@ const Projects = () => {
                         target="_blank"
                         rel="noreferrer"
                         href={project.github}
+                        data-umami-event={project.github}
+
                       >
                         [GitHub]
                       </a>

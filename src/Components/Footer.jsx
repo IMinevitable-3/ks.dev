@@ -60,10 +60,11 @@ const Footer = () => {
           {!isLoading && !isError && (
             <a
               className="duration-500 hover:text-[#ED4245]"
-              href="/analytics"
+              href="https://umami-nu-ivory.vercel.app/websites/9fa0c9e1-12cf-4477-91b9-791595acda1e"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sendAnalyticsSignal("analytics")}
+              
             >
               {Math.floor(visitorCount / 2)} views
             </a>

@@ -22,6 +22,8 @@ export const SocialLinks = () => {
             sendAnalyticsSignal("mail");
             window.open(socials[social].url, "_blank");
           }}
+          data-umami-event="mail"
+
         >
           {socials[social].icon}
           <span>{social}</span>

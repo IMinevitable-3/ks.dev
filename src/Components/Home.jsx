@@ -35,10 +35,14 @@ const Home = () => {
           </p>
 
           <div className="mt-5 text-2xl">
-            <a className="duration-500 hover:text-[#ED4245]" href="/about">
+            <a className="duration-500 hover:text-[#ED4245]" href="/about"
+            data-umami-event="to-about-from-home"
+            >
               [About]
             </a>
-            <a className="duration-500 hover:text-[#ED4245]" href="/projects">
+            <a className="duration-500 hover:text-[#ED4245]" href="/projects" 
+            data-umami-event="to-projects-from-home"  
+            >
               [Projects]
             </a>
           </div>

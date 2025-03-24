@@ -23,6 +23,7 @@ const MyExperience = () => {
                 sendAnalyticsSignal(exp.company);
                 window.open(exp.product, "_blank");
               }}
+              data-umami-event={exp.company}
             >
               {exp.company}
             </a>

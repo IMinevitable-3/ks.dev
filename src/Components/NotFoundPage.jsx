@@ -12,6 +12,8 @@ const NotFoundPage = () => {
         <a
           href="/"
           className="mt-4 px-4 py-2 bg-[#ED4245] text-white rounded hover:bg-[#C72A2A] transition duration-300"
+          data-umami-event="went-to-homepage-from404"
+
         >
           Go to Homepage
         </a>
